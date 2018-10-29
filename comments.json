@@ -1,0 +1,84 @@
+[
+    {
+        "subject": "My first comment",
+        "name": "chuckjee",
+        "content": "This lab is so fun! Let's explore more with Bootstrap and jQuery.",
+        "color": "green",
+        "replies": [
+            {
+                "subject": "My first reply",
+                "name": "leochoi",
+                "content": "This is not so fun.",
+                "color": "red",
+                "replies": [
+                    {
+                        "subject": "My second reply",
+                        "name": "leochoi",
+                        "content": "I don't like this",
+                        "color": "yellow",
+                        "replies": [
+                            {
+                                "subject": "1",
+                                "name": "leochoi2",
+                                "content": "Hi.",
+                                "color": "red",
+                                "replies": []
+                            },
+                            {
+                                "subject": "2",
+                                "name": "leochoi2",
+                                "content": "Hi.",
+                                "color": "red",
+                                "replies": []
+                            },
+                            {
+                                "subject": "3",
+                                "name": "leochoi2",
+                                "content": "Hi.",
+                                "color": "red",
+                                "replies": []
+                            },
+                            {
+                                "subject": "4",
+                                "name": "leochoi2",
+                                "content": "Hi.",
+                                "color": "red",
+                                "replies": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "subject": "My third reply",
+                "name": "leochoi",
+                "content": "This is not.",
+                "color": "green",
+                "replies": [
+                    {
+                        "subject": "5",
+                        "name": "leochoi2",
+                        "content": "Hi.",
+                        "color": "red",
+                        "replies": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "subject": "My second comment",
+        "name": "leochoi2",
+        "content": "Hi.",
+        "color": "red",
+        "replies": [
+            {
+                "subject": "6",
+                "name": "leochoi2",
+                "content": "Hi.",
+                "color": "red",
+                "replies": []
+            }
+        ]
+    }
+]
