@@ -19,15 +19,16 @@
                         <h6>${input.inputName || 'No Name'}</h6>
                         <p>${input.inputComment || 'Empty'}</p>
                         <a href="#" class="reply-btn">Reply</a>
+                        <p style="font-size:0.5em">${JSON.stringify(input.inputData) || ''}</p>
                     </div>
                 </div>
             `);
 
             // On reply
             setTimeout(function () {
-                $(".reply-btn").off('click');
+                $('.reply-btn').off('click');
 
-                $(".reply-btn").click(function (event) {
+                $('.reply-btn').click(function (event) {
                     removeAllReplyForms();
                     addReplyForm($(event.target));
                 });
@@ -50,15 +51,16 @@
                             <h6>${input.inputName || 'No Name'}</h6>
                             <p>${input.inputComment || 'Empty'}</p>
                             <a href="#" class="reply-btn">Reply</a>
+                            <p style="font-size:0.5em">${JSON.stringify(input.inputData) || ''}</p>
                         </div>
                     </div>
                 `);
 
             // On reply
             setTimeout(function () {
-                $(".reply-btn").off('click');
+                $('.reply-btn').off('click');
 
-                $(".reply-btn").click(function (event) {
+                $('.reply-btn').click(function (event) {
                     removeAllReplyForms();
                     addReplyForm($(event.target));
                 });
@@ -69,20 +71,8 @@
             return replyEl;
         }
 
-        function addReplies(el, commentOrReply, level) {
-            if (!level) level = 1;
-
-            for (var reply of commentOrReply.replies) {
-                var replyEl = addReply(el.find("> .media > .media-body").last(), toInput(reply), level);
-
-                if (reply.replies) {
-                    addReplies(replyEl, reply, level + 1);
-                }
-            }
-        }
-
         function removeAllReplyForms() {
-            $("#add-reply-form").remove();
+            $('#add-reply-form').remove();
         }
 
         function addReplyForm(el) {
@@ -129,9 +119,9 @@
 
             // On submit reply
             setTimeout(function () {
-                $("#add-reply-form").off('submit');
+                $('#add-reply-form').off('submit');
 
-                $("#add-reply-form").on('submit', function (event) {
+                $('#add-reply-form').on('submit', function (event) {
                     event.preventDefault();
 
                     var reply = {};
@@ -171,8 +161,8 @@
             });
 
             // Load comments
-            $.get("comments.json", function (comments) {
-                for (var comment of comments) {
+            $.get("http://appsrv.cse.cuhk.edu.hk/~mkchoi6/readcomments.php", function (comments) {
+                for (var comment of JSON.parse(comments)) {
                     var commentEl = addComment(toInput(comment));
 
                     addReplies(commentEl, comment);
@@ -180,7 +170,23 @@
             });
         });
 
+        function addReplies(el, commentOrReply, level) {
+            if (!level) level = 1;
+
+            for (var reply of commentOrReply.replies) {
+                var replyEl = addReply(el.find("> .media > .media-body").last(), toInput(reply), level);
+
+                if (reply.replies) {
+                    addReplies(replyEl, reply, level + 1);
+                }
+            }
+        }
+
         function save() {
+            $.post('http://appsrv.cse.cuhk.edu.hk/~mkchoi6/writecomments.php', { contents: getSerializedComments() }, function (data) {
+                console.log(data);
+            });
+
             console.log(getSerializedComments());
         }
 
@@ -232,7 +238,8 @@
                 inputName: commentOrReply.name,
                 inputSubject: commentOrReply.subject,
                 inputComment: commentOrReply.content,
-                inputColor: commentOrReply.color
+                inputColor: commentOrReply.color,
+                inputData: commentOrReply.data
             };
         }
 
